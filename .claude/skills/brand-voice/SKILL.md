@@ -1,86 +1,179 @@
 ---
 name: brand-voice
-description: Source of truth for brand voice, tone, and style. Use whenever writing or reviewing any external-facing copy (ads, emails, landing pages, social, PR) so output stays on-brand. Invoke before drafting and again as a checklist before shipping.
+description: Source of truth for UNBOXING brand voice, tone, and style. Use whenever writing or reviewing any external-facing copy (ads, emails, landing pages, social, PR) so output stays on-brand. Invoke before drafting and again as a checklist before shipping. Output language is Hebrew only.
 ---
 
-# Brand voice
+# Brand voice — UNBOXING
 
-This skill defines how the brand sounds. Every writing or review agent
+This skill defines how UNBOXING sounds. Every writing or review agent
 must read it before producing or approving copy.
 
-> **First-time setup:** the user must fill in the `Brand inputs` block
-> below. Until they do, default to the placeholder voice (clear,
-> confident, jargon-free, second-person) and flag at the top of every
-> deliverable that brand voice has not yet been calibrated.
+> **Output language is Hebrew only.** Even when the brief is written
+> in English, all customer-facing copy must be produced in Hebrew.
+> If asked to write in another language, flag it and ask the user to
+> confirm before proceeding.
 
 ---
 
-## 1. Brand inputs (fill in)
+## 1. Brand inputs
 
-- **Brand name:** _TBD_
-- **One-line description:** _TBD_
-- **Audience (primary):** _TBD — link to `audience-personas` skill_
-- **Voice attributes (3–5 adjectives):** _e.g. confident, plainspoken, warm, irreverent_
-- **Anti-attributes (what we are NOT):** _e.g. corporate, hype-y, clever-for-its-own-sake_
-- **Reading level target:** _e.g. grade 7–8_
-- **Sentence length target:** _e.g. avg 12–18 words; mix short + medium_
-- **POV default:** _e.g. second-person ("you"), active voice_
-- **Tense default:** _present_
-- **Oxford comma:** _yes / no_
-- **Emoji policy:** _e.g. social only, never in product or email_
+- **Brand name:** UNBOXING (always uppercase, used inline as a word
+  and as a verb: "לעשות UNBOXING").
+- **One-line description:** ליווי פיננסי הוליסטי — הוצאה של הכסף שלכם
+  מתוך הקופסה כדי שיעבוד בשבילכם.
+- **Founder / persona behind the brand:** ירדן — מייסדת ויועצת יחידה.
+  כל הקופי נכתב בגוף ראשון יחיד נקבה ("אני").
+- **Audience (primary):** see `audience-personas` skill — P1 (זוגות
+  ומשפחות), P2 (סינגלים יציבים), P3 (זוגות בתחילת דרך משותפת).
+- **Voice attributes (5):**
+  1. **אישית ושוות-עיניים** — מובילה עם אמפתיה ועם הסיפור האישי של
+     ירדן ("גם אני פחדתי להשקיע פעם"). לא יועצת ממרום, חברה שיודעת.
+  2. **דוגריסטית / ישראלית** — שפה יומיומית, תכל'ס. שימוש מדוד בסלנג
+     ישראלי (ראו §4). בלי תרגומית, בלי שפת בנקאות גבוהה.
+  3. **אנטי-הייפ ומסגור-מחדש** — מתעמתת ישירות עם מיתוסים פיננסיים
+     ("רוב האנשים בטוחים שצריך 'לעשות את המכה'… האמת היא שצריך
+     פשוט סדר ואסטרטגיה"). פותחת בפרדיגמה הרווחת ומפרקת אותה.
+  4. **שותפה, לא 'יועצת שנעלמת'** — חמה, צמודה, ביד-ביד. ממסגרת מול
+     הארכיטיפ של "תוכנית במגירה" / "מתכון מהדודה" שמשאיר אותך לבד.
+  5. **מספרים על דמיונות** — "בלי סיפורים וחלומות, תכל'ס מספרים
+     ויישום פרקטי." כל הבטחה רגשית מעוגנת במשהו קונקרטי (סכום,
+     זמן, צעד פעולה).
+- **Anti-attributes (NEVER):** הייפי, "פעם בחיים", סוד מהעולם
+  הפיננסי, התעשרות מהירה, התנשאות יועצית, קור תאגידי, קלישאות בנקים
+  ("ניהול נכסים מתקדם", "פתרונות חכמים").
+- **Reading level:** רמה 7–8 — מובן לכל ישראלי בוגר, גם בלי רקע
+  פיננסי. אם נדרש מונח מקצועי, להגדיר אותו במקום.
+- **Sentence length:** ממוצע 12–18 מילים. לערבב משפטים קצרים (4–6
+  מילים) למקצב. כותרות תמיד קצרות וחדות.
+- **POV default:**
+  - אל הקורא: גוף שני **רבים** ("שלכם", "אתם", "תרגישו"). גם
+    כשפונים לסינגלית/סינגל — שומרים על "שלכם" (ניטרלי, חם, שייך).
+  - מהמותג: גוף **ראשון יחיד נקבה** ("אני מלמדת", "אני השותפה
+    שלכם"). אסור "אנחנו" כאילו יש צוות גדול — אין.
+- **Tense default:** הווה. עתיד רק כשמדובר על תוצאה/הבטחה.
+- **Emoji policy:** מותר בכותרות סקשנים (כמו 🧩 📈 🤝) ובסושיאל.
+  אסור בגוף טקסט של דף נחיתה, מייל עסקי, מסמך משפטי, או הודעת שגיאה.
 
 ## 2. Tone matrix (situation → tone shift)
 
-| Situation | Tone shift |
+| מצב | היסט טון |
 |---|---|
-| Onboarding / welcome | Warmer, more reassuring |
-| Error / failure | Plain, accountable, brief; no jokes |
-| Marketing top-of-funnel | Curious, benefit-led |
-| Marketing bottom-of-funnel | Specific, proof-led, low-friction CTA |
-| PR / exec comms | More formal, third-person OK |
-| Crisis | Direct, factual, human, no marketing-speak |
+| הוק/דף נחיתה (TOFU) | פתיחה ברגש ("תקועים?", "מרגישים ש…?"), מסגור-מחדש מהיר, CTA רך |
+| בוטום-פאנל / שיחת היכרות | קונקרטי, פרקטי, מספרים + תהליך, CTA חד |
+| אונבורדינג ללקוח חדש | חם, מרגיע, מוביל ביד, "אני איתכם" |
+| תוכן חינוכי (פוסט/ניוזלטר) | מורה-חברה, עם דוגמה אישית, בלי התנשאות |
+| עדכון שוק יומי | קצר, ענייני, בלי דרמה ובלי תחזיות |
+| שגיאה/בעיה טכנית | פשוט, אחראי, בלי הומור, בלי שיווק |
+| משבר שוק / תקופה תנודתית | רגוע, "ראינו את זה קורה", זום-אאוט לטווח ארוך |
+| גיוס/שיתופי פעולה (PR) | קצת יותר רשמי, גוף ראשון נשמר, אבל בלי סלנג |
 
 ## 3. Do / don't
 
 **Do**
-- Lead with the reader's problem, then the answer.
-- Use concrete nouns and verbs. Numbers > adjectives.
-- Cut filler ("just", "simply", "in order to", "leverage").
-- Read every sentence aloud — if it sounds like a brochure, rewrite.
+- לפתוח עם הכאב או השאלה של הקורא, לא עם המוצר.
+- להשתמש במטאפורת **הקופסה / UNBOXING** כשהיא משרתת את המסר —
+  היא העוגן הקריאייטיבי. לא לשחוק אותה: לא בכל פסקה.
+- לעגן כל הבטחה רגשית במספר, צעד פעולה או דוגמה ("74M ש"ח",
+  "52 לקוחות", "צעד-צעד עד שהכסף מושקע").
+- לקרוא בקול. אם זה לא נשמע כמו ירדן מדברת לחברה — לכתוב מחדש.
+- להוביל עם הסיפור האישי של ירדן כשמתאים ("גם אני…", "כשאני
+  התחלתי…").
+- מקפים ארוכים (–) להפסקה דרמטית, כמו במקור באתר.
 
 **Don't**
-- Don't use buzzwords (synergy, robust, best-in-class, game-changing).
-- Don't stack adjectives.
-- Don't bury the verb.
-- Don't make claims without proof nearby.
+- בלי "אנחנו" / "הצוות שלנו" / "החברה" — UNBOXING זו ירדן.
+- בלי הבטחות תשואה, בלי "תרוויחו X%", בלי "הסוד של…", בלי
+  "פעם בחיים".
+- בלי שפת בנקים: "פתרון פיננסי מקיף", "ניהול נכסים מתקדם",
+  "אסטרטגיה ייחודית" (כן ל"אסטרטגיה" — לא ל"ייחודית").
+- בלי השוואה ישירה למתחרים בשם.
+- בלי שלילת ידע של הקורא ("אתם בטח לא יודעים ש…").
+- בלי תרגום מאנגלית שנשמע מסורבל ("לקחת את הפיננסים שלכם לרמה
+  הבאה" — לא).
+- בלי 3+ שמות-תואר ברצף.
+- בלי קלישאות פיננסיות: "לגרום לכסף לעבוד בשבילכם" מותר רק עם
+  ניסוח חדש ("נגרום לו לעבוד קשה כמוכם" עובד בגלל המקצב).
 
 ## 4. Vocabulary
 
-- **Always:** _project-specific preferred terms (TBD)_
-- **Never:** _banned terms (TBD)_
-- **Capitalize:** _product names, feature names (TBD)_
-- **Lowercase:** _e.g. "the dashboard", "the integration"_
+### Always (לקסיקון מותג — להשתמש)
+
+- **UNBOXING** — תמיד באותיות אנגלית גדולות, גם באמצע משפט עברי.
+- **לעשות UNBOXING** — UNBOXING כפועל. לגיטימי לכל סקשן/קמפיין.
+- **הקופסה** — הכסף התקוע, המוח התקוע, הסטטוס-קוו.
+- **ליווי הוליסטי** / **ליווי יד ביד** / **השותפה שלכם**.
+- **תכנון, אסטרטגיה, סדר, יישום פרקטי** — ארבעה עמודי תווך
+  רציונליים.
+- **חופש, ביטחון, בחירה** — שלוש מילות התשלובת הרגשית. הן ה-RTBs
+  הרגשיים, אסור להחליף אותן ב"שקט נפשי", "רוגע", "הצלחה".
+- **תכל'ס** — מותר ומומלץ במידה. לא יותר מפעם אחת בעמוד/פוסט.
+- **בעו"ש** — שימוש מדויק לכאב הספציפי של כסף שיושב בחשבון.
+
+### Never (אסור)
+
+- "**לעשות את המכה**", "**הכה את המכה**", "**הזדמנות פעם בחיים**",
+  "**הסוד של…**", "**בלי סיכון**", "**תשואה מובטחת**" — שפה של
+  פינפלואנסרים.
+- "**מומחית פיננסית מובילה**", "**יועצת מספר 1**" — סופרלטיבים
+  שאי אפשר לבסס.
+- "**מתכון**" כשם של מוצר משלנו (זו מילה שאנחנו תוקפות).
+- "**אונקל מהבנק**" / "**הדודה**" — מותר רק כדוגמה לאנטי-מודל,
+  לא כתיאור של מישהו אמיתי.
+- **תרגומיות מאנגלית** — "לקחת לרמה הבאה", "בלתי ניתן לעצירה",
+  "לפצח את הקוד".
+- **פניה במגדר זכר בלבד** — תמיד כולל ("אתם/אתן", "שלכם/שלכן")
+  או ניטרלי ("שלכם" כברירת מחדל לרבים).
+- **גוף שלישי על ירדן** ("ירדן עוזרת ל…") — תמיד גוף ראשון
+  אלא אם זה PR/אודות-של-מישהו-אחר.
+
+### Capitalize / spelling
+
+- **UNBOXING** — תמיד CAPS אנגלית.
+- **ירדן** — שם פרטי בלבד באתר/קופי. שם משפחה רק בעמוד "אודות"
+  ובמסמכים רשמיים.
+- **₪** או **ש"ח** — עקביות בקמפיין; ברירת מחדל ש"ח לכותרות
+  ארוכות, ₪ למספרים גדולים בתבליטים ("74M ₪").
+- **בעו"ש** — תמיד עם גרשיים.
 
 ## 5. Formatting conventions
 
-- Headlines: sentence case unless brand decides otherwise.
-- Numbers: spell out one–nine, numerals for 10+.
-- Dashes: en-dash for ranges, em-dash for breaks.
-- Lists: parallel grammar, ≤ 7 items, no terminal punctuation in
-  short bullets.
-- Links: descriptive, never "click here".
+- כותרות: קצרות, ללא נקודה בסוף. שאלה — עם סימן שאלה.
+- מספרים: 0–9 במילים בתוך פרוזה ("שלוש פגישות"); 10+ בספרות.
+  סכומי כסף תמיד בספרות.
+- מקפים: מקף ארוך ( – ) להפסקה דרמטית, כמו "אני לא נותנת לכם
+  'מתכון' מהדודה ונעלמת – אני השותפה שלכם".
+- רשימות: ≤ 7 פריטים, דקדוק מקבילי (כל הפריטים מתחילים בפועל,
+  או כל הפריטים מתחילים בשם עצם — לא לערבב).
+- קישורים: טקסט תיאורי, לא "לחצו כאן".
+- פניה לכפול-מגדר: ברירת מחדל "שלכם" (זכר רבים כניטרלי). בקמפיין
+  ממוקד נשים — לעבור ל"שלכן".
 
-## 6. Quick voice check (use as a 30-second review)
+## 6. Quick voice check (30 שניות לפני שליחה)
 
-1. Could a competitor publish this exact sentence? If yes, rewrite.
-2. Does the first 10 words tell the reader why they should care?
-3. Any banned word, buzzword, or stacked adjectives? Cut.
-4. Is the CTA specific (verb + outcome) and singular?
-5. Read aloud — does it sound like a person, not a press release?
+1. האם המתחרה הקרוב ביותר היה יכול לפרסם בדיוק את המשפט הזה?
+   אם כן — לכתוב מחדש.
+2. האם ב-10 המילים הראשונות הקורא מבין למה זה רלוונטי לחיים שלו?
+3. האם יש מילה אסורה (§4 Never), קלישאת בנק, או שלוש שמות-תואר
+   ברצף? לחתוך.
+4. האם ה-CTA ספציפי (פועל + תוצאה) ויחיד? "ליווי UNBOXING" — כן.
+   "ללמוד עוד" — לא.
+5. האם יש מספר, צעד, או דוגמה קונקרטית להבטחה הרגשית?
+6. קריאה בקול — האם זה נשמע כמו ירדן מדברת לחברה, או כמו אתר
+   של בנק?
+7. האם POV עקבי (גוף ראשון יחיד נקבה לירדן, גוף שני רבים לקורא)?
 
 ## 7. Versioning
 
-Update this file whenever a campaign retro surfaces a new rule. Bump
-the date below so downstream agents know when they last calibrated.
+עדכון הקובץ נדרש בכל פעם שרטרו של קמפיין חושף כלל חדש או מילה
+שצריכה להיכנס/לצאת מהלקסיקון. עדכן את התאריך למטה כדי שכל הסוכנים
+ידעו מתי הם כיולו לאחרונה.
 
-- **Last updated:** _YYYY-MM-DD — initial scaffold, awaiting inputs_
+- **Last updated:** 2026-05-01 — initial calibration from
+  unboxing.finance hero, about, and "how it works" sections
+  (5 mobile screenshots).
+- **Open items:**
+  - לאשר עם ירדן: שימוש ב"שלכן" כברירת מחדל בקמפיינים שמיועדים
+    בעיקר לנשים.
+  - לאשר: האם רשום שם משפחה כלשהו ב-PR/about, או רק "ירדן".
+  - לאסוף 3–5 פוסטי סושיאל קיימים ולהשוות לכלל ה-Voice — אם יש
+    פערים, לעדכן.
