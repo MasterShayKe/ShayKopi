@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#08060f" />
+<title>whatnot-prep</title>
+<style>
+  :root {
+    --bg: #08060f;
+    --bg-2: #110a1f;
+    --purple: #bf5fff;
+    --purple-soft: rgba(191, 95, 255, 0.18);
+    --cyan: #00ffe7;
+    --cyan-soft: rgba(0, 255, 231, 0.15);
+    --text: #ece8f7;
+    --muted: #8a83a3;
+    --danger: #ff4f7a;
+    --gold: #ffce5c;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+  body {
+    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    background:
+      radial-gradient(circle at 12% -10%, rgba(191, 95, 255, 0.18), transparent 40%),
+      radial-gradient(circle at 100% 110%, rgba(0, 255, 231, 0.12), transparent 45%),
+      var(--bg);
+  }
+  header {
+    padding: 18px 18px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    background: linear-gradient(90deg, var(--purple), var(--cyan));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .count {
+    font-size: 12px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+  }
+  main {
+    padding: 0 14px 120px;
+    max-width: 720px;
+    margin: 0 auto;
+  }
+  .uploader {
+    border: 1.5px dashed rgba(191, 95, 255, 0.45);
+    border-radius: 18px;
+    padding: 22px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(191, 95, 255, 0.08), rgba(0, 255, 231, 0.04));
+    margin-top: 6px;
+  }
+  .uploader p {
+    margin: 0 0 14px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+  .btn-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  button, label.btn {
+    appearance: none;
+    border: 0;
+    background: var(--purple);
+    color: #0a0414;
+    padding: 12px 18px;
+    font-size: 15px;
+    font-weight: 700;
+    border-radius: 999px;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+    transition: transform 0.05s ease;
+    -webkit-tap-highlight-color: transparent;
+  }
+  button:active, label.btn:active { transform: scale(0.97); }
+  button.secondary, label.btn.secondary {
+    background: transparent;
+    color: var(--cyan);
+    border: 1.5px solid var(--cyan);
+  }
+  button.ghost {
+    background: transparent;
+    color: var(--muted);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  input[type=file] { display: none; }
+
+  .status {
+    text-align: center;
+    margin: 14px 0 0;
+    font-size: 13px;
+    min-height: 18px;
+    color: var(--cyan);
+  }
+  .status.error { color: var(--danger); }
+
+  .toolbar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 22px 4px 10px;
+  }
+  .toolbar h2 {
+    margin: 0;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+  .toolbar .actions { display: flex; gap: 8px; }
+  .toolbar button {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
+
+  .card-list { display: flex; flex-direction: column; gap: 12px; }
+  .card {
+    background: linear-gradient(180deg, var(--bg-2), #0c081a);
+    border: 1px solid rgba(191, 95, 255, 0.18);
+    border-radius: 16px;
+    padding: 14px 16px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+    position: relative;
+  }
+  .card .top {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .card .meta { flex: 1; min-width: 0; }
+  .card h3 {
+    margin: 0 0 4px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.25;
+    overflow-wrap: anywhere;
+  }
+  .card .sub {
+    margin: 0;
+    font-size: 12px;
+    color: var(--muted);
+    overflow-wrap: anywhere;
+  }
+  .tier {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    padding: 6px 10px;
+    border-radius: 999px;
+    flex-shrink: 0;
+  }
+  .tier.HEAT { background: linear-gradient(90deg, #ff4f7a, var(--gold)); color: #1a0608; }
+  .tier.SOLID { background: var(--cyan); color: #001b18; }
+  .tier.FILLER { background: rgba(255, 255, 255, 0.08); color: var(--muted); }
+
+  .hype {
+    margin: 10px 0 8px;
+    font-size: 14px;
+    line-height: 1.4;
+    color: var(--text);
+    font-style: italic;
+  }
+  .row {
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .prices {
+    display: flex;
+    gap: 14px;
+    margin-top: 6px;
+    font-size: 13px;
+  }
+  .prices span b { color: var(--cyan); font-weight: 700; }
+  .order-pill {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    font-size: 10px;
+    color: var(--muted);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 3px 8px;
+    border-radius: 999px;
+  }
+  .card .description {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+    line-height: 1.45;
+  }
+  .card details { margin-top: 8px; }
+  .card details summary {
+    cursor: pointer;
+    color: var(--purple);
+    font-size: 12px;
+    list-style: none;
+  }
+  .card details summary::-webkit-details-marker { display: none; }
+  .card .remove {
+    position: absolute;
+    bottom: 10px;
+    right: 12px;
+    background: transparent;
+    color: var(--muted);
+    border: 0;
+    padding: 4px 8px;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  .empty {
+    text-align: center;
+    color: var(--muted);
+    padding: 30px 10px;
+    font-size: 13px;
+  }
+  .toast {
+    position: fixed;
+    bottom: 22px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--cyan);
+    color: #001b18;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+  }
+  .toast.show { opacity: 1; }
+
+  .preview {
+    display: none;
+    margin-top: 12px;
+    border-radius: 12px;
+    max-width: 100%;
+    max-height: 220px;
+    object-fit: contain;
+  }
+
+  .spinner {
+    width: 18px; height: 18px;
+    border: 2px solid rgba(255,255,255,0.15);
+    border-top-color: var(--cyan);
+    border-radius: 50%;
+    display: inline-block;
+    vertical-align: -3px;
+    margin-right: 6px;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+</style>
+</head>
+<body>
+  <header>
+    <h1>whatnot-prep</h1>
+    <span class="count" id="count">0 cards</span>
+  </header>
+  <main>
+    <section class="uploader">
+      <p>Snap or upload a card. Claude does the rest.</p>
+      <div class="btn-row">
+        <label class="btn" for="cameraInput">Snap card</label>
+        <label class="btn secondary" for="fileInput">Upload</label>
+      </div>
+      <input id="cameraInput" type="file" accept="image/*" capture="environment" />
+      <input id="fileInput" type="file" accept="image/*" />
+      <img id="preview" class="preview" alt="" />
+      <div class="status" id="status"></div>
+    </section>
+
+    <div class="toolbar">
+      <h2>Show order</h2>
+      <div class="actions">
+        <button id="exportBtn" class="ghost" type="button">Export</button>
+        <button id="clearBtn" class="ghost" type="button">Clear</button>
+      </div>
+    </div>
+
+    <div class="card-list" id="list"></div>
+    <div class="empty" id="empty">No cards yet — snap one to start the pile.</div>
+  </main>
+
+  <div class="toast" id="toast">Copied!</div>
+
+<script>
+const STORAGE_KEY = "whatnot-prep:cards";
+const $ = (id) => document.getElementById(id);
+
+const state = {
+  cards: load(),
+};
+
+function load() {
+  try {
+    return JSON.parse(localStorage.getItem(STORAGE_KEY) || "[]");
+  } catch { return []; }
+}
+function save() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state.cards));
+}
+
+function fmtPrice(p) {
+  if (p === null || p === undefined) return "–";
+  return "$" + Number(p).toFixed(2);
+}
+
+function render() {
+  const list = $("list");
+  const empty = $("empty");
+  list.innerHTML = "";
+  const sorted = [...state.cards].sort(
+    (a, b) => (a.tier?.show_order_score ?? 0) - (b.tier?.show_order_score ?? 0)
+  );
+  $("count").textContent = sorted.length + (sorted.length === 1 ? " card" : " cards");
+  empty.style.display = sorted.length ? "none" : "block";
+  for (const c of sorted) {
+    const tier = c.tier?.tier || "FILLER";
+    const el = document.createElement("article");
+    el.className = "card";
+    const subBits = [c.card?.set, c.card?.number, c.card?.variant, c.card?.rarity]
+      .filter(x => x && x !== "none").join(" • ");
+    el.innerHTML = `
+      <div class="order-pill">order ${c.tier?.show_order_score ?? "?"}</div>
+      <div class="top">
+        <div class="meta">
+          <h3></h3>
+          <p class="sub"></p>
+        </div>
+        <span class="tier ${tier}">${tier}</span>
+      </div>
+      <p class="hype"></p>
+      <div class="prices">
+        <span>low <b>${fmtPrice(c.prices?.low)}</b></span>
+        <span>mid <b>${fmtPrice(c.prices?.mid)}</b></span>
+        <span>high <b>${fmtPrice(c.prices?.high)}</b></span>
+        <span style="color:var(--muted);margin-left:auto">${c.prices?.count ?? 0} comps</span>
+      </div>
+      <details>
+        <summary>Description</summary>
+        <p class="description"></p>
+      </details>
+      <button class="remove" data-id="${c.id}" type="button">remove</button>
+    `;
+    el.querySelector("h3").textContent = c.card?.name || "Unknown card";
+    el.querySelector(".sub").textContent = subBits || "—";
+    el.querySelector(".hype").textContent = c.tier?.hype_line || "";
+    el.querySelector(".description").textContent = c.tier?.whatnot_description || "";
+    list.appendChild(el);
+  }
+}
+
+function toast(msg) {
+  const t = $("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 1500);
+}
+
+function setStatus(msg, isError = false) {
+  const s = $("status");
+  s.innerHTML = msg ? (isError ? msg : `<span class="spinner"></span>${msg}`) : "";
+  s.classList.toggle("error", !!isError);
+  if (isError) s.innerHTML = msg;
+}
+
+async function handleFile(file) {
+  if (!file) return;
+  const url = URL.createObjectURL(file);
+  const preview = $("preview");
+  preview.src = url;
+  preview.style.display = "block";
+
+  setStatus("Reading card…");
+  const fd = new FormData();
+  fd.append("image", file);
+  try {
+    const resp = await fetch("/api/analyze", { method: "POST", body: fd });
+    const data = await resp.json();
+    if (!resp.ok) {
+      setStatus(data.error || "Something broke", true);
+      return;
+    }
+    const entry = {
+      id: crypto.randomUUID ? crypto.randomUUID() : String(Date.now()),
+      ts: Date.now(),
+      card: data.card,
+      prices: data.prices,
+      tier: data.tier,
+      ebay_query: data.ebay_query,
+    };
+    state.cards.push(entry);
+    save();
+    render();
+    let note = `${entry.card?.name || "Card"} — ${entry.tier?.tier}`;
+    if (data.scrape_error) note += " (no comps scraped)";
+    setStatus(note);
+    setTimeout(() => setStatus(""), 2500);
+  } catch (err) {
+    setStatus("Network error: " + err.message, true);
+  } finally {
+    setTimeout(() => { preview.style.display = "none"; URL.revokeObjectURL(url); }, 1500);
+  }
+}
+
+function exportScript() {
+  if (!state.cards.length) { toast("Nothing to export"); return; }
+  const sorted = [...state.cards].sort(
+    (a, b) => (a.tier?.show_order_score ?? 0) - (b.tier?.show_order_score ?? 0)
+  );
+  const lines = ["WHATNOT SHOW SCRIPT", "===================", ""];
+  sorted.forEach((c, i) => {
+    const t = c.tier || {};
+    const p = c.prices || {};
+    lines.push(
+      `${String(i + 1).padStart(2, "0")}. [${t.tier || "?"}] ${c.card?.name || "Unknown"}`,
+      `    ${[c.card?.set, c.card?.number, c.card?.variant].filter(x => x && x !== "none").join(" • ") || "—"}`,
+      `    Hype: ${t.hype_line || ""}`,
+      `    Range: ${fmtPrice(p.low)} – ${fmtPrice(p.high)} (mid ${fmtPrice(p.mid)}, ${p.count || 0} comps)`,
+      `    Desc: ${t.whatnot_description || ""}`,
+      ""
+    );
+  });
+  const text = lines.join("\n");
+  const fallback = () => {
+    const ta = document.createElement("textarea");
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand("copy");
+    ta.remove();
+  };
+  if (navigator.clipboard?.writeText) {
+    navigator.clipboard.writeText(text).then(() => toast("Script copied"), fallback);
+  } else {
+    fallback();
+    toast("Script copied");
+  }
+}
+
+$("cameraInput").addEventListener("change", (e) => handleFile(e.target.files[0]));
+$("fileInput").addEventListener("change", (e) => handleFile(e.target.files[0]));
+$("clearBtn").addEventListener("click", () => {
+  if (!state.cards.length) return;
+  if (!confirm("Clear all cards from the show?")) return;
+  state.cards = [];
+  save();
+  render();
+});
+$("exportBtn").addEventListener("click", exportScript);
+$("list").addEventListener("click", (e) => {
+  const btn = e.target.closest("button.remove");
+  if (!btn) return;
+  const id = btn.dataset.id;
+  state.cards = state.cards.filter(c => c.id !== id);
+  save();
+  render();
+});
+
+render();
+</script>
+</body>
+</html>
