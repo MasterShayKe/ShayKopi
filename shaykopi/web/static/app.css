@@ -1,0 +1,65 @@
+:root {
+  --bg: #0d1117;
+  --fg: #e6edf3;
+  --muted: #8b949e;
+  --accent: #58a6ff;
+  --row-alt: #161b22;
+  --good: #2ea043;
+  --warn: #d29922;
+  --hot: #f85149;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+}
+header {
+  display: flex; align-items: center; gap: 2rem;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid #30363d;
+}
+header h1 { font-size: 1.25rem; margin: 0; }
+header a { color: var(--fg); text-decoration: none; }
+header nav a { margin-right: 1rem; color: var(--muted); }
+header nav a:hover { color: var(--accent); }
+main { padding: 1rem 1.5rem; }
+.filters {
+  display: flex; gap: 1rem; flex-wrap: wrap;
+  margin-bottom: 1rem;
+  align-items: end;
+}
+.filters label { display: flex; flex-direction: column; font-size: 0.8rem; color: var(--muted); }
+.filters input, .filters select {
+  background: var(--row-alt); color: var(--fg);
+  border: 1px solid #30363d; border-radius: 4px;
+  padding: 0.35rem 0.5rem; font-size: 0.9rem;
+}
+.filters button {
+  background: var(--accent); color: #0d1117;
+  border: 0; border-radius: 4px;
+  padding: 0.4rem 0.9rem; font-weight: 600; cursor: pointer;
+}
+table.deals {
+  width: 100%; border-collapse: collapse;
+  font-size: 0.9rem;
+}
+table.deals th, table.deals td {
+  padding: 0.5rem 0.6rem; border-bottom: 1px solid #21262d;
+  text-align: left; vertical-align: top;
+}
+table.deals th { color: var(--muted); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; }
+table.deals tr:nth-child(even) { background: var(--row-alt); }
+table.deals a { color: var(--accent); text-decoration: none; }
+table.deals small { color: var(--muted); }
+.status-bought { opacity: 0.5; }
+.status-ignored { opacity: 0.35; }
+button {
+  background: #21262d; color: var(--fg);
+  border: 1px solid #30363d; border-radius: 4px;
+  padding: 0.25rem 0.6rem; font-size: 0.8rem; cursor: pointer;
+  margin-right: 0.25rem;
+}
+button:hover { border-color: var(--accent); }
+img { border-radius: 4px; }

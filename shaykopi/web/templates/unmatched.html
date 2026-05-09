@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Unmatched{% endblock %}
+{% block content %}
+<p>Listings the matcher couldn't link to a canonical card. Useful for refining the catalog or matcher regexes.</p>
+<table class="deals">
+  <thead>
+    <tr><th></th><th>Title</th><th>Site</th><th>Price</th></tr>
+  </thead>
+  <tbody>
+  {% for l in listings %}
+    <tr>
+      <td>{% if l.image %}<img src="{{ l.image }}" alt="" width="48" />{% endif %}</td>
+      <td><a href="{{ l.url }}" target="_blank" rel="noopener">{{ l.title }}</a></td>
+      <td>{{ l.site }}</td>
+      <td>${{ "%.2f"|format(l.price) }}</td>
+    </tr>
+  {% else %}
+    <tr><td colspan="4">All listings are matched.</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
